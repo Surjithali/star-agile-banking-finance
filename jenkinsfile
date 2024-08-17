@@ -3,14 +3,14 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                git url:'https://github.com/Surjithali/star-agile-banking-finance.git', branch: "master"
+                git url:'https://github.com/Surjithali/star-agile-banking-finance/', branch: "master"
                sh 'mvn clean install'
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t srk/project04:v1 .'
+                    sh 'docker build -t surjithali/project15aug:v1'
                 }
             }
         }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-pwd', passwordVariable: 'Surjith@123', usernameVariable: 'surjithali')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push surjithali/project14aug:v1'
+                    sh 'docker push surjithali/project15aug:v1'
                 }
             }
         }
